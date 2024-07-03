@@ -1,30 +1,9 @@
 <template>
   <div class="dashboard bg-slate-200 h-screen">
-    <nav class="bg-white border-gray-200">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <div class="flex items-center">
-          <img src="../assets/note-logo.png" class="h-8 mr-3" />
-          <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Notation</span>
-        </div>
-        <div class="items-center justify-between w-full md:flex md:w-auto md:order-1 menu-container" id="navbar-search">
-          <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0">
-            <li>
-              <p>Item 1</p>
-            </li>
-            <li>
-              <p>Item 2</p>
-            </li>
-            <li>
-              <button @click="this.logout()">Sair</button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <NavMenu/>
     <div class="p-5 flex justify-center">
       <div class="p-2 w-[95%] border-[1px] rounded-lg border-black bg-white">
         <p>Olá, {{ user.nickname }}!</p>
-        <p>Você tem <b>{{ notes.length }}</b> notas salvas.</p>
         <input
           v-model="searchNote"
           placeholder="Procurar nota"
@@ -127,11 +106,13 @@
 <script>
 import { VueDraggableNext } from 'vue-draggable-next'
 import { mapState, mapActions } from 'vuex';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import NavMenu from '@/components/NavMenu.vue';
 
 export default {
   name: 'DashboardView',
   components: {
+    NavMenu,
     draggable: VueDraggableNext,
   },
   data() {
