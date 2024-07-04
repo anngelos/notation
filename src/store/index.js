@@ -10,6 +10,7 @@ export default createStore({
     token: null,
     user: null,
     notes: [],
+    searchNote: '',
   },
 
   getters: {
@@ -33,6 +34,10 @@ export default createStore({
 
     SET_NOTES(state, notes) {
       state.notes = notes;
+    },
+
+    SET_SEARCH_NOTE(state, searchNote) {
+      state.searchNote = searchNote;
     },
   },
 

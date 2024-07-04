@@ -44,7 +44,7 @@
 
 <script>
 import { VueDraggableNext } from 'vue-draggable-next'
-import { mapState, mapActions } from 'vuex';
+import { mapState } from 'vuex';
 import Swal from 'sweetalert2';
 
 export default {
@@ -61,8 +61,6 @@ export default {
     ...mapState(['notes']),
   },
   methods: {
-    ...mapActions(['getAllUserNotes']),
-
     truncateText(text, maxLength) {
       if (text.length > maxLength) {
         return text.substring(0, maxLength) + '...';
