@@ -18,7 +18,7 @@
     </div>
 
     <!-- este aqui deve ser componentizado e chamado de FilteredNotes -->
-    <draggable v-else-if="searchNote" class="dragArea w-full flex" ghost-class="ghost" :list="list"> -->
+    <draggable v-else-if="searchNote" class="dragArea w-full flex" ghost-class="ghost" :list="list">
       <div v-for="note in filteredNotes" :key="note.id" class="m-6 block max-w-[18rem] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
         <div class="flex justify-center border-b-2 border-[#0000002d] px-6 py-2 text-neutral-600">
           #{{ note.id }}
@@ -83,20 +83,21 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user', 'notes', 'myFilteredNotes', 'searchNotes']),
+    ...mapState(['user', 'notes', 'myFilteredNotes']),
 
     filteredNotes() {
       if (!this.searchNote) {
         return
       }
-
+      
+      console.log(this.searchNote)
       const search = this.searchNote.toLowerCase();
 
-      let myNotes = this.myFilteredNotes.filter(note => 
+      let myNotes = this.notes.filter(note => 
         note.title.toLowerCase().includes(search) || 
         note.content.toLowerCase().includes(search)
       );
-
+      console.log(myNotes)
       return myNotes;
     },
   },

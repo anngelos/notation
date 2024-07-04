@@ -79,9 +79,6 @@ export default {
       })
     }
   },
-  mounted() {
-    this.getAllUserNotes();
-  }
 }
 </script>
 
