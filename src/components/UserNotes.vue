@@ -19,7 +19,7 @@
               <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
             </svg>
           </button>
-          <button class="mr-3 inline-flex items-center justify-center w-8 h-8 transition-colors duration-150 rounded-full focus:shadow-outline icon">
+          <button @click="deleteUserNote(note.id)" class="mr-3 inline-flex items-center justify-center w-8 h-8 transition-colors duration-150 rounded-full focus:shadow-outline icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
             </svg>
@@ -44,7 +44,7 @@
 
 <script>
 import { VueDraggableNext } from 'vue-draggable-next'
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import Swal from 'sweetalert2';
 
 export default {
@@ -61,6 +61,8 @@ export default {
     ...mapState(['notes']),
   },
   methods: {
+    ...mapActions(['deleteUserNote']),
+
     truncateText(text, maxLength) {
       if (text.length > maxLength) {
         return text.substring(0, maxLength) + '...';
@@ -99,6 +101,10 @@ export default {
             });
           });
       }
+    },
+
+    async removeNote(id) {
+      await this.deleteUserNote(id);
     },
   },
 }

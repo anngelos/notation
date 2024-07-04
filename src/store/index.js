@@ -39,6 +39,10 @@ export default createStore({
     SET_SEARCH_NOTE(state, searchNote) {
       state.searchNote = searchNote;
     },
+
+    DELETE_NOTE(state, noteId) {
+      state.notes = state.notes.filter(note => note.id !== noteId);
+    },
   },
 
   actions: {
@@ -89,6 +93,26 @@ export default createStore({
         });
 
         commit("SET_NOTES", response.data);
+      } catch (error) {
+        throw error;
+      }
+    },
+
+    async deleteUserNote({ state, commit }, noteId) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${state.token}`
+        }
+      };
+
+      const data = {
+        nickname: state.user.nickname
+      };
+
+      try {
+        await axios.delete(`http://localhost:3000/notes/${noteId}`, { ...config, data });
+        commit("DELETE_NOTE", noteId);
+        return { message: "NOTE_REMOVED_SUCCESSFULLY" }
       } catch (error) {
         throw error;
       }

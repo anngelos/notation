@@ -8,10 +8,10 @@
       <div class="items-center justify-between w-full md:flex md:w-auto md:order-1 menu-container" id="navbar-search">
         <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0">
           <li>
-            <p>Item 1</p>
+            <button class="btn-nav">Criar nota</button>
           </li>
           <li>
-            <button @click="this.logout()">Sair</button>
+            <button @click="this.logout()" class="btn-nav">Sair</button>
           </li>
         </ul>
       </div>
@@ -30,3 +30,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.btn-nav:hover {
+  text-decoration: underline #FACC15 3px;
+}
+</style>
