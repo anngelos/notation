@@ -15,5 +15,5 @@ JavaScript | HTML5 | CSS3 | VueJS | SweetAlert2
 
 ## Run the project
 
-In the terminal, navigate to the root of the project and run the command `npm install` to install all dependencies. Run the command `npm run serve` to start the project.
+In the terminal, navigate to the root of the project and run the command `npm install` to install all dependencies. Run the command `npm run dev` to start the project.
 It is recommended to also download the backend [Notation-API](https://github.com/anngelos/notation-api) to run and test a fully FullStack application.

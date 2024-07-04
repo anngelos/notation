@@ -27,7 +27,7 @@
                 d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
             </svg>
           </button>
-          <button class="mr-3 inline-flex items-center justify-center w-8 h-8 transition-colors duration-150 rounded-full focus:shadow-outline icon">
+          <button @click="copyText(note.id)" class="mr-3 inline-flex items-center justify-center w-8 h-8 transition-colors duration-150 rounded-full focus:shadow-outline icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2" viewBox="0 0 16 16">
               <path
                 d="M3.5 2a.5.5 0 0 0-.5.5v12a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-12a.5.5 0 0 0-.5-.5H12a.5.5 0 0 1 0-1h.5A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1H4a.5.5 0 0 1 0 1h-.5Z" />
@@ -91,7 +91,31 @@ export default {
         confirmButtonColor: "#FACC15",
         confirmButtonText: "Voltar"
       })
-    }
+    },
+
+    copyText(id) {
+      const note = this.notes.find(note => note.id === id);
+      
+      if (note) {
+        navigator.clipboard.writeText(note.content)
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Texto copiado!',
+              showConfirmButton: false,
+              timer: 900
+            });
+          })
+          .catch(err => {
+            console.error('Erro ao copiar texto:', err);
+            Swal.fire({
+              icon: 'error',
+              title: 'Erro ao copiar texto',
+              text: 'Tente novamente mais tarde.'
+            });
+          });
+      }
+    },
   },
 }
 </script>
