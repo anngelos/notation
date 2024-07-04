@@ -73,15 +73,8 @@ export default {
         note.title.toLowerCase().includes(search) || 
         note.content.toLowerCase().includes(search)
       );
-      console.log('SEARCHNOTE = ', this.searchNote);
-      console.log('MYNOTES = ', myNotes)
       return myNotes;
     },
-  },
-  watch: {
-    myNotes(newNotes) {
-      console.log('Received Notes:', newNotes); // Adicionado para depuração
-    }
   },
   methods: {
     truncateText(text, maxLength) {
