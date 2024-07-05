@@ -13,25 +13,32 @@
             </svg>
           </div>
         </div>
-        <div class="my-5 flex flex-col space-y-4">
+        <form @submit.prevent="saveChanges(noteData)" class="my-5 flex flex-col space-y-4">
           <input v-model="noteData.title" type="text" placeholder="titulo" class="mb-3 py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500" />
-          <textarea v-model="noteData.content" placeholder="digite o conteúdo da sua nota aqui" name="note-content" cols="30" rows="7"
-            class="mb-3 py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500 note-content"></textarea>
-        </div>
-        <div class="flex justify-end pt-2">
-          <button @click="close" class="focus:outline-none modal-close px-4 border border-black p-3 rounded-lg text-black hover:bg-yellow-400">
-            Cancelar
-          </button>
-          <button class="focus:outline-none px-4 bg-white p-3 ml-3 border border-black rounded-lg text-black hover:bg-yellow-400 hover:text-black">
-            Salvar
-          </button>
-        </div>
+          <textarea v-model="noteData.content" maxlength="127" placeholder="digite o conteúdo da sua nota aqui" name="note-content" cols="30" rows="7"
+          class="mb-3 py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500 note-content"></textarea>
+          <input
+            v-model="noteData.authorNickname"
+            disabled
+            type="text" 
+            placeholder="titulo"
+            class="mb-3 py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500"
+          />
+          <div class="flex justify-end pt-2">
+            <button @click="close" class="focus:outline-none modal-close px-4 border border-black p-3 rounded-lg text-black hover:bg-yellow-400">
+              Cancelar
+            </button>
+            <input type="submit" value="Salvar" class="focus:outline-none px-4 bg-white p-3 ml-3 border border-black rounded-lg text-black hover:bg-yellow-400 hover:text-black">
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'EditNoteModal',
   props: {
@@ -43,15 +50,33 @@ export default {
   data() {
     return {
       noteData: {
+        id: this.note.id,
         title: this.note.title,
         content: this.note.content,
+        authorNickname: this.note.authorNickname,
       }
     }
   },
   methods: {
+    ...mapActions(['editUserNote']),
+
     close() {
       this.$emit('close');
-    }
+    },
+
+    async saveChanges(noteData) {
+      const res = await this.editUserNote(noteData);
+
+      if (res.message == "NOTE_EDITED_SUCCESSFULLY") {
+        this.close();
+      }
+    },
+
+    checkMaxLength() {
+      if (this.noteData.content.length > 120) {
+        this.noteData.content = this.noteData.content.slice(0, 120);
+      }
+    },
   },
 }
 </script>

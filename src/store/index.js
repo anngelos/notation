@@ -43,6 +43,13 @@ export default createStore({
     DELETE_NOTE(state, noteId) {
       state.notes = state.notes.filter(note => note.id !== noteId);
     },
+
+    UPDATE_NOTE(state, updatedNote) {
+      const index = state.notes.findIndex(note => note.id === updatedNote.id);
+      if (index !== -1) {
+        state.notes.splice(index, 1, updatedNote);
+      }
+    },
   },
 
   actions: {
@@ -113,6 +120,31 @@ export default createStore({
         await axios.delete(`http://localhost:3000/notes/${noteId}`, { ...config, data });
         commit("DELETE_NOTE", noteId);
         return { message: "NOTE_REMOVED_SUCCESSFULLY" }
+      } catch (error) {
+        throw error;
+      }
+    },
+
+    async editUserNote({ state, commit }, payload) {
+      try {
+        const { id, title, content, authorNickname } = payload
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${state.token}`
+          }
+        };
+
+        const data = {
+          title,
+          content,
+          authorNickname
+        }
+        
+        await axios.patch(`http://localhost:3000/notes/${id}`, data, config)
+
+        commit("UPDATE_NOTE", { id: id, title: title, content: content, authorNickname: authorNickname });
+        return { message: "NOTE_EDITED_SUCCESSFULLY" }
       } catch (error) {
         throw error;
       }
