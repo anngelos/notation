@@ -142,4 +142,10 @@ export default {
 .ghost {
   visibility: hidden;
 }
+
+.icon:hover {
+  -xpedu-transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  transform: scale(1.3);
+}
 </style>
