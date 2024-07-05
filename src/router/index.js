@@ -3,6 +3,7 @@ import store from '@/store';
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import DashboardView from '@/views/DashboardView.vue'
+import UserInfoView from '@/views/UserInfoView.vue'
 
 const routes = [
   {
@@ -14,6 +15,13 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+
+  {
+    path: '/user-info',
+    name: 'userinfo',
+    component: UserInfoView,
+    meta: { requiresAuth: true },
   },
 
   {
