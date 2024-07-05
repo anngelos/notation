@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster"
-    style="background: rgba(0, 0, 0, 0.7)">
+  <div class="main-modal fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster">
     <div class="border border-gray-900 modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
       <div class="modal-content py-4 text-left px-6">
         <div class="flex justify-between items-center pb-3">
@@ -28,7 +26,7 @@
             <button @click="close" class="focus:outline-none modal-close px-4 border border-black p-3 rounded-lg text-black hover:bg-yellow-400">
               Cancelar
             </button>
-            <input type="submit" value="Salvar" class="focus:outline-none px-4 bg-white p-3 ml-3 border border-black rounded-lg text-black hover:bg-yellow-400 hover:text-black">
+            <input type="submit" value="Salvar" class="cursor-pointer focus:outline-none px-4 bg-white p-3 ml-3 border border-black rounded-lg text-black hover:bg-yellow-400 hover:text-black">
           </div>
         </form>
       </div>
@@ -84,5 +82,9 @@ export default {
 <style>
 .note-content {
   resize: none;
+}
+
+.main-modal {
+  background: #000000b3;
 }
 </style>

@@ -150,6 +150,29 @@ export default createStore({
       }
     },
 
+    async createUserNote({ state, commit }, payload) {
+      try {
+        const { title, content } = payload;
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${state.token}`
+          }
+        };
+
+        const data = {
+          title,
+          content,
+          authorNickname: state.user.nickname,
+        };
+
+        await axios.post("http://localhost:3000/notes", data, config )
+        return { message: "NOTE_CREATED_SUCCESSFULLY" }
+      } catch (error) {
+        throw error;
+      }
+    },
+
     logout({ commit }) {
       localStorage.removeItem("vuex");
       commit("LOGOUT");
