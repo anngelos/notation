@@ -1,7 +1,7 @@
 <template>
   <EditUserProfileModal v-if="showEditUserProfileModal" @close="close" />
   <div v-else class="bg-slate-200 fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center animated fadeIn faster">
-    <div class="bg-white w-11/12 h-[80%] md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+    <div class="bg-white w-[70%] h-[80%] mx-auto rounded shadow-lg z-50 overflow-y-auto">
       <div class="py-4 text-left px-6 h-full flex flex-col justify-between">
         <div class="flex justify-between items-center pb-3">
           <p class="text-3xl font-bold">Dados do Usuário</p>
