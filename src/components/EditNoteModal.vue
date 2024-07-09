@@ -15,13 +15,6 @@
           <input v-model="noteData.title" type="text" placeholder="titulo" class="mb-3 py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500" />
           <textarea v-model="noteData.content" maxlength="127" placeholder="digite o conteúdo da sua nota aqui" name="note-content" cols="30" rows="7"
           class="mb-3 py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500 note-content"></textarea>
-          <input
-            v-model="noteData.authorNickname"
-            disabled
-            type="text" 
-            placeholder="titulo"
-            class="mb-3 py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500"
-          />
           <div class="flex justify-end pt-2">
             <button @click="close" class="focus:outline-none modal-close px-4 border border-black p-3 rounded-lg text-black hover:bg-yellow-400">
               Cancelar
@@ -51,7 +44,6 @@ export default {
         id: this.note.id,
         title: this.note.title,
         content: this.note.content,
-        authorNickname: this.note.authorNickname,
       }
     }
   },

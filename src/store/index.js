@@ -138,7 +138,7 @@ export default createStore({
         const data = {
           title,
           content,
-          authorNickname
+          authorNickname: state.user.nickname
         }
         
         await axios.patch(`http://localhost:3000/notes/${id}`, data, config)
