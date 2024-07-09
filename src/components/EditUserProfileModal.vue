@@ -15,6 +15,7 @@
             </svg>
           </div>
         </div>
+        <p>Ao editar o usuário vale lembrar que você será deslogado e redirecionado para a tela de login</p>
         <form @submit.prevent="update(this.editUserData)" class="my-5 flex flex-col space-y-4">
           <input v-model="editUserData.name" type="text" placeholder="nome"
             class="py-1 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-slate-500" />
@@ -56,7 +57,7 @@ export default {
   },
   computed: {},
   methods: {
-    ...mapActions(['updateUser']),
+    ...mapActions(['updateUser', 'logout']),
 
     close() {
       this.$emit('close');
@@ -70,9 +71,11 @@ export default {
           Swal.fire({
             icon: "success",
             text: "Usuário editado com sucesso.",
+            timer: 1000,
             confirmButtonColor: "#FACC15",
             confirmButtonText: "Certo"
           })
+          this.logout();          
         } else {
           Swal.fire({
             icon: "error",
